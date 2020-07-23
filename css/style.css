@@ -1,0 +1,52 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --success-color: #2ecc71;
+  --error-color: #e74c3c;
+}
+
+.input-wrapper input {
+  border: 1px solid #dbdbdb;
+  padding: 8px 10px;
+  border-radius: 4px;
+  width: 100%;
+  outline: none;
+}
+
+.input-wrapper input.error {
+  border-color: var(--error-color);
+}
+
+.input-wrapper input.success {
+  border-color: var(--success-color);
+}
+
+.input-wrapper {
+  margin:0 0 10px 0;
+}
+
+.btn {
+  padding: 8px 20px;
+  background-color: #057cfe;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.input-wrapper div.error {
+  color: #ff0000;
+  margin: 3px 0 0 3px;
+}
+
+#redirect-to-login {
+  cursor: pointer;
+}
+
+#redirect-to-register {
+  cursor: pointer;
+}
