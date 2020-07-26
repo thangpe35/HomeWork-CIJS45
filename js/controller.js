@@ -67,9 +67,35 @@ controller.register = (firstName, lastName, email, password, confirmPassword) =>
   checkLength(password, 6, 25);
   checkEmail(email);
   checkPasswordsMatch(password, confirmPassword);
+
+  if (
+    lastName.value !== '' &&
+    email.value !== '' &&
+    password.value !== '' &&
+    confirmPassword.value !== '' &&
+    password.value === confirmPassword.value) {
+    model.register(email.value, password.value, firstName.value, lastName.value);
+  }
+
+  // if (
+  //   checkRequired(inputs) &&
+  //   checkLength(password, 6, 25) &&
+  //   checkEmail(email) &&
+  //   checkPasswordsMatch(password, confirmPassword)
+  // ) {
+  //   console.log('true');
+  //   model.register(email.value, password.value);
+  // }
 }
 
 // Handle login
 controller.login = (inputs) => {
   checkRequired(inputs);
+  let [email, password] = inputs;
+  if (
+    email.value !== '' &&
+    password.value !== ''
+  ) {
+    model.login(email.value, password.value);
+  }
 }

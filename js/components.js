@@ -1,10 +1,17 @@
-const components = {};
+const components = {
+  chatScreen(data) {
+    return `
+  <h1>Welcome ${data.displayName}</h1>
+  `;
+  }
+};
+
 components.welcomeScreen = `
   <h1>Hello</h1>
 `;
 
 components.registerScreen = `
-<div class="register-container">
+<div class="login-container">
   <div class="aside-right">
     <div class="header">
       <h2>My chat</h3>

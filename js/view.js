@@ -1,6 +1,6 @@
 const view = {};
 
-view.setActiveScreen = (screenName) => {
+view.setActiveScreen = (screenName, data) => {
   // let registerForm = document.getElementById('register-form');
 
   switch (screenName) {
@@ -57,5 +57,9 @@ view.setActiveScreen = (screenName) => {
       })
 
       break;
+
+    // Chat Screen
+    case 'chatScreen':
+      document.getElementById('app').innerHTML = components.chatScreen(data);
   }
 }
