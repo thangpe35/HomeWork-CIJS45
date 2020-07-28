@@ -1,9 +1,9 @@
 const components = {
-  chatScreen(data) {
-    return `
-  <h1>Welcome ${data.displayName}</h1>
-  `;
-  }
+  // chatScreen(data) {
+  //   return `
+  // <h1>Welcome ${data.displayName}</h1>
+  // `;
+  // }
 };
 
 components.welcomeScreen = `
@@ -81,3 +81,7 @@ components.loginScreen = `
 </div>
 
 `;
+
+components.chatScreen = `
+<h1 id='welcome-user'></h1>
+`

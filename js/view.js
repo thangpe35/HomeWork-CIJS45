@@ -60,6 +60,7 @@ view.setActiveScreen = (screenName, data) => {
 
     // Chat Screen
     case 'chatScreen':
-      document.getElementById('app').innerHTML = components.chatScreen(data);
+      document.getElementById('app').innerHTML = components.chatScreen;
+      document.getElementById('welcome-user').innerHTML = `Welcome ${model.currentUser.displayName}`;
   }
 }

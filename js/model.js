@@ -37,7 +37,7 @@ model.login = async (email, password) => {
         displayName: response.user.displayName,
         email: response.user.email,
       }
-      view.setActiveScreen('chatScreen', model.currentUser);
+      view.setActiveScreen('chatScreen');
     }
   } catch (err) {
     if (err.code == 'auth/user-not-found' || err.code == 'auth/invalid-email') {
