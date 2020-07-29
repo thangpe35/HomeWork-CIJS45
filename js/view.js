@@ -1,7 +1,6 @@
 const view = {};
 
 view.setActiveScreen = (screenName, data) => {
-  // let registerForm = document.getElementById('register-form');
 
   switch (screenName) {
     // Welcome screen 
@@ -61,6 +60,55 @@ view.setActiveScreen = (screenName, data) => {
     // Chat Screen
     case 'chatScreen':
       document.getElementById('app').innerHTML = components.chatScreen;
-      document.getElementById('welcome-user').innerHTML = `Welcome ${model.currentUser.displayName}`;
+      const sendMessageForm = document.getElementById('send-message-form');
+      sendMessageForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const message = {
+          content: sendMessageForm.message.value,
+          owner: data.email,
+        }
+        const botMsg = {
+          content: sendMessageForm.message.value,
+          owner: 'Bot',
+        }
+        const reg = /\S/g;
+        if (message.content == '' || !reg.test(message.content)) {
+          sendMessageForm.message.value = '';
+        } else {
+          view.addMessage(message, data);
+          view.addMessage(botMsg, data);
+        }
+        sendMessageForm.message.value = '';
+      })
+      break;
   }
+}
+
+view.addMessage = (message, data) => {
+  let messageWrapper = document.createElement('div');
+  messageWrapper.classList.add('message-container');
+  if (message.owner === data.email) {
+    messageWrapper.classList.add('mine')
+    messageWrapper.innerHTML = `
+      <div class='content'>
+        ${message.content}
+      </div>
+    `
+  } else {
+    messageWrapper.classList.add('other');
+    messageWrapper.innerHTML = `
+      <div class="owner">
+        ${message.owner}
+      </div>
+      <div class="content">
+        ${message.content}
+      </div>
+    `
+  }
+  document.querySelector('.list-messages').appendChild(messageWrapper);
+  const out = document.getElementById('out');
+
+  let isScrolledToBottom = out.scrollHeight - out.clientHeight <= out.scrollTop;
+  if (!isScrolledToBottom)
+    out.scrollTop = out.scrollHeight - out.clientHeight;
 }
