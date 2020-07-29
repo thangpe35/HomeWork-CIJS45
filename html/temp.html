@@ -4,35 +4,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Temp</title>
   <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/login.css">
+  <link rel="stylesheet" href="../css/chat.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Document</title>
 </head>
 
 <body>
-  <div class="login-container">
-    <div class="aside-right">
-      <div class="header">
-        <h2>My chat</h3>
-      </div>
-      <form id='login-form'>
-        <div class="input-wrapper">
-          <input type='text' placeholder="Email" name='email' />
-          <div class="error" id='email-error'></div>
+  <div class="chat-container">
+    <div class="header">
+      My Chat
+    </div>
+    <div class="main">
+      <div class="conversation-detail">
+        <div class="conversation-header">
+          First conversation
         </div>
-        <div class="input-wrapper">
-          <input type='password' placeholder="Password" name='password' />
-          <div class="error" id='password-error'></div>
+        <div class="list-messages">
+          <div class="message-container mine">
+            <div class="content">
+              Hello world
+            </div>
+          </div>
+          <div class="message-container other">
+            <div class="owner">
+              Tungpx97@gmail.com
+            </div>
+            <div class="content">
+              Goodbye world
+            </div>
+          </div>
         </div>
-        <div class="form-action">
-          <span id='login-to-redirect'>
-            Don't have an account? Login
-          </span>
-          <button type="submit" class="btn">
-            Register
+        <form id='send-message-form'>
+          <div class="input-wrapper">
+            <input type="text" name='message' placeholder="Type a message" />
+          </div>
+          <button type="submit">
+            <i class="fa fa-paper-plane" aria-hidden="true"></i>
           </button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
 </body>

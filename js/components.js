@@ -1,10 +1,4 @@
-const components = {
-  chatScreen(data) {
-    return `
-  <h1>Welcome ${data.displayName}</h1>
-  `;
-  }
-};
+const components = {};
 
 components.welcomeScreen = `
   <h1>Hello</h1>
@@ -80,4 +74,29 @@ components.loginScreen = `
   </div>
 </div>
 
+`;
+
+components.chatScreen = `
+<div class="chat-container">
+  <div class="header">
+    My Chat
+  </div>
+  <div class="main">
+    <div class="conversation-detail">
+      <div class="conversation-header">
+        First conversation
+      </div>
+      <div id='out' class="list-messages">
+      </div>
+      <form id='send-message-form'>
+        <div class="input-wrapper">
+          <input type="text" name='message' placeholder="Type a message" />
+        </div>
+        <button type="submit">
+          <i class="fa fa-paper-plane" aria-hidden="true"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
 `;

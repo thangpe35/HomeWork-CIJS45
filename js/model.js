@@ -29,7 +29,7 @@ model.register = async (email, password, firstName, lastName) => {
 model.login = async (email, password) => {
   try {
     const response = await firebase.auth().signInWithEmailAndPassword(email, password);
-    // console.log(response);
+    console.log(response.user);
     if (!response.user.emailVerified) {
       alert('Please verify your email');
     } else {
@@ -37,7 +37,8 @@ model.login = async (email, password) => {
         displayName: response.user.displayName,
         email: response.user.email,
       }
-      view.setActiveScreen('chatScreen', model.currentUser);
+      view.setActiveScreen('chatScreen');
+
     }
   } catch (err) {
     if (err.code == 'auth/user-not-found' || err.code == 'auth/invalid-email') {
@@ -46,5 +47,19 @@ model.login = async (email, password) => {
       alert('Wrong Password')
     }
     // console.log(err);
+  }
+}
+
+model.chat = async () => {
+  try {
+    const response = await firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        // User is signed in.
+        view.setActiveScreen('chatScreen', user);
+      }
+    });
+  }
+  catch (err) {
+    console.log(err);
   }
 }

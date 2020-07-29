@@ -99,3 +99,4 @@ controller.login = (inputs) => {
     model.login(email.value, password.value);
   }
 }
+
