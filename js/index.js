@@ -13,7 +13,7 @@ const init = () => {
   firebase.initializeApp(firebaseConfig);
   console.log(firebase.app().name);
   model.chat();
-  // view.setActiveScreen('loginScreen');
+  // view.setActiveScreen('registerScreen');
 }
 
 window.onload = init;

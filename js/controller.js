@@ -21,23 +21,29 @@ function getFieldName(input) {
 
 // Check required fields
 function checkRequired(inputs) {
+  let flag = 0;
   inputs.forEach(function (input) {
     if (input.value === '' || input.value.split(' ').length > 1) {
       showError(input, `${getFieldName(input)} is required or shouldn't contain blank space`);
+      flag++;
     } else {
       showSuccess(input);
     }
   })
+  return flag;
 }
 
 // Check length field
 function checkLength(input, min, max) {
   if (input.value.length < min) {
     showError(input, `${getFieldName(input)} must be at least ${min}`)
+    return false;
   } else if (input.value.length > max) {
     showError(input, `${getFieldName(input)} must be less than ${max}`);
+    return false;
   } else {
     showSuccess(input);
+    return true;
   }
 }
 
@@ -47,8 +53,10 @@ function checkEmail(input) {
 
   if (re.test(String(input.value).toLowerCase())) {
     showSuccess(input);
+    return true;
   } else {
     showError(input, 'Email is not valid');
+    return false;
   }
 }
 
@@ -56,7 +64,8 @@ function checkEmail(input) {
 function checkPasswordsMatch(password, confirmPassword) {
   if (password.value !== confirmPassword.value) {
     showError(confirmPassword, 'Password do not match');
-  }
+    return false;
+  } else return true;
 }
 
 // Handle register
@@ -68,35 +77,39 @@ controller.register = (firstName, lastName, email, password, confirmPassword) =>
   checkEmail(email);
   checkPasswordsMatch(password, confirmPassword);
 
+  // if (
+  //   lastName.value !== '' &&
+  //   email.value !== '' &&
+  //   password.value !== '' &&
+  //   confirmPassword.value !== '' &&
+  //   password.value === confirmPassword.value) {
+  //   model.register(email.value, password.value, firstName.value, lastName.value);
+  // }
+
   if (
-    lastName.value !== '' &&
-    email.value !== '' &&
-    password.value !== '' &&
-    confirmPassword.value !== '' &&
-    password.value === confirmPassword.value) {
+    !checkRequired(inputs) &&
+    checkLength(password, 6, 25) &&
+    checkEmail(email) &&
+    checkPasswordsMatch(password, confirmPassword)
+  ) {
+    console.log('true');
     model.register(email.value, password.value, firstName.value, lastName.value);
   }
-
-  // if (
-  //   checkRequired(inputs) &&
-  //   checkLength(password, 6, 25) &&
-  //   checkEmail(email) &&
-  //   checkPasswordsMatch(password, confirmPassword)
-  // ) {
-  //   console.log('true');
-  //   model.register(email.value, password.value);
-  // }
 }
 
 // Handle login
 controller.login = (inputs) => {
   checkRequired(inputs);
   let [email, password] = inputs;
-  if (
-    email.value !== '' &&
-    password.value !== ''
-  ) {
-    model.login(email.value, password.value);
+  // if (
+  //   email.value !== '' &&
+  //   password.value !== ''
+  // ) {
+  //   model.login(email, password);
+  // }
+
+  if (!checkRequired(inputs)) {
+    model.login(email, password);
   }
 }
 
