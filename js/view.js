@@ -112,3 +112,4 @@ view.addMessage = (message, data) => {
   if (!isScrolledToBottom)
     out.scrollTop = out.scrollHeight - out.clientHeight;
 }
+

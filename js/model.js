@@ -28,8 +28,7 @@ model.register = async (email, password, firstName, lastName) => {
 
 model.login = async (email, password) => {
   try {
-    const response = await firebase.auth().signInWithEmailAndPassword(email, password);
-    console.log(response.user);
+    const response = await firebase.auth().signInWithEmailAndPassword(email.value, password.value);
     if (!response.user.emailVerified) {
       alert('Please verify your email');
     } else {
@@ -42,9 +41,9 @@ model.login = async (email, password) => {
     }
   } catch (err) {
     if (err.code == 'auth/user-not-found' || err.code == 'auth/invalid-email') {
-      alert('Email is not registered');
+      showError(email, 'Email is not registered');
     } else if (err.code == 'auth/wrong-password') {
-      alert('Wrong Password')
+      showError(password, 'Password is wrong');
     }
     // console.log(err);
   }
