@@ -12,8 +12,8 @@ const init = () => {
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-  firestoreFunction();
-  console.log(firebase.app().name);
+  // firestoreFunction();
+  // console.log(firebase.app().name);
   model.chat();
   // view.setActiveScreen('registerScreen');
 }
