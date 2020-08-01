@@ -1,0 +1,4 @@
+sign out: firebase.auth().signOut()
+
+collection: 1 list chua nhung object cung loai voi nhau
+document: nhu object

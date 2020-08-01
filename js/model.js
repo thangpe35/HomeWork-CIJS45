@@ -29,16 +29,6 @@ model.register = async (email, password, firstName, lastName) => {
 model.login = async (email, password) => {
   try {
     const response = await firebase.auth().signInWithEmailAndPassword(email.value, password.value);
-    if (!response.user.emailVerified) {
-      alert('Please verify your email');
-    } else {
-      model.currentUser = {
-        displayName: response.user.displayName,
-        email: response.user.email,
-      }
-      view.setActiveScreen('chatScreen');
-
-    }
   } catch (err) {
     if (err.code == 'auth/user-not-found' || err.code == 'auth/invalid-email') {
       showError(email, 'Email is not registered');
@@ -51,10 +41,21 @@ model.login = async (email, password) => {
 
 model.chat = async () => {
   try {
-    const response = await firebase.auth().onAuthStateChanged(function (user) {
+    await firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
         // User is signed in.
-        view.setActiveScreen('chatScreen', user);
+        if (user.emailVerified) {
+          model.currentUser = {
+            displayName: user.displayName,
+            email: user.email
+          }
+          view.setActiveScreen('chatScreen');
+        } else {
+          view.setActiveScreen('loginScreen');
+          alert('Please verify your email');
+        }
+      } else {
+        view.setActiveScreen('loginScreen');
       }
     });
   }
