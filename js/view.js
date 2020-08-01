@@ -1,6 +1,6 @@
 const view = {};
 
-view.setActiveScreen = (screenName, data) => {
+view.setActiveScreen = (screenName) => {
 
   switch (screenName) {
     // Welcome screen 
@@ -65,7 +65,7 @@ view.setActiveScreen = (screenName, data) => {
         e.preventDefault();
         const message = {
           content: sendMessageForm.message.value,
-          owner: data.email,
+          owner: model.currentUser.email,
         }
         const botMsg = {
           content: sendMessageForm.message.value,
@@ -75,8 +75,8 @@ view.setActiveScreen = (screenName, data) => {
         if (message.content == '' || !reg.test(message.content)) {
           sendMessageForm.message.value = '';
         } else {
-          view.addMessage(message, data);
-          view.addMessage(botMsg, data);
+          view.addMessage(message);
+          view.addMessage(botMsg);
         }
         sendMessageForm.message.value = '';
       })
@@ -84,10 +84,10 @@ view.setActiveScreen = (screenName, data) => {
   }
 }
 
-view.addMessage = (message, data) => {
+view.addMessage = (message) => {
   let messageWrapper = document.createElement('div');
   messageWrapper.classList.add('message-container');
-  if (message.owner === data.email) {
+  if (message.owner === model.currentUser.email) {
     messageWrapper.classList.add('mine')
     messageWrapper.innerHTML = `
       <div class='content'>

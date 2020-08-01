@@ -92,7 +92,6 @@ controller.register = (firstName, lastName, email, password, confirmPassword) =>
     checkEmail(email) &&
     checkPasswordsMatch(password, confirmPassword)
   ) {
-    console.log('true');
     model.register(email.value, password.value, firstName.value, lastName.value);
   }
 }
@@ -101,12 +100,6 @@ controller.register = (firstName, lastName, email, password, confirmPassword) =>
 controller.login = (inputs) => {
   checkRequired(inputs);
   let [email, password] = inputs;
-  // if (
-  //   email.value !== '' &&
-  //   password.value !== ''
-  // ) {
-  //   model.login(email, password);
-  // }
 
   if (!checkRequired(inputs)) {
     model.login(email, password);
